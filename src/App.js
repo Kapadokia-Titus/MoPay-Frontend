@@ -1,24 +1,44 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+import { Routes, Route } from "react-router-dom";
 import './App.css';
+import Footer from './components/footer';
+import NavBar from './components/NavBar';
+import Dashboard from './pages/dashboard';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 function App() {
+  const [user, setUser] = useState(null)
+
+  useEffect(()=>{
+    // auto-login
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <NavBar user={user} setUser={setUser} />
+    <main>
+      {user ? (
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard user={user} name={user.username}/>}/>
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/signup" element={<SignUp setUser={setUser} />}/>
+          <Route path="/login" element={<Login setUser={setUser} />}/>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/dashboard" element={<Dashboard user={user}/>}/>
+        </Routes>
+      )}
+    </main>
+    <Footer/>
+  </>
   );
 }
 
