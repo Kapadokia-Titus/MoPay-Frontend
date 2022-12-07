@@ -17,7 +17,7 @@ export default function Login({ setUser }) {
 
   
     function handleSubmit(e) {
-      fetch("http://localhost:3000", {
+      fetch("/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
