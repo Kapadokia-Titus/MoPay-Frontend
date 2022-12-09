@@ -37,7 +37,7 @@ export default function Dashboard({user, name, setCard}) {
         nav("/details", {state:{state:card}})
     }
 
-    console.log(myCard)
+    console.log(uuid)
     
         if (user) {
             return (
