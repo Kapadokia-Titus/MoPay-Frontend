@@ -18,6 +18,7 @@ export default function Dashboard({user, name, setCard}) {
     useEffect(()=>{
         
         fetch(`https://mopay-production.up.railway.app/users/1`,{
+            method:'GET',
             headers: {
                 "Access-Control-Allow-Origin":"no-cors",
                 "Content-Type": "application/json"
