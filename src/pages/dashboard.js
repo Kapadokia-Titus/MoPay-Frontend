@@ -17,7 +17,7 @@ export default function Dashboard({user, name, setCard}) {
     const nav = useNavigate();
     useEffect(()=>{
         
-        fetch(`https://mopay-production.up.railway.app/users/${user?.id}`,{
+        fetch(`https://mopay-production.up.railway.app/users/1}`,{
             headers: {
                 "Access-Control-Allow-Origin":"no-cors",
                 "Content-Type": "application/json",
