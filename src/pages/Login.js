@@ -19,8 +19,9 @@ export default function Login({ setUser }) {
     function handleSubmit(e) {
       fetch("/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+        headers: { 
+         "access-control-allow-origin" : "*",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(formValue),
       }).then((r) => {
