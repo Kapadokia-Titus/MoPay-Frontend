@@ -17,7 +17,6 @@ export default function Login({ setUser }) {
 
   
     function handleSubmit(e) {
-      e.preventDefault();
       fetch("https://mopay-production.up.railway.app/login", {
         method: "POST",
         headers: { 
@@ -28,7 +27,7 @@ export default function Login({ setUser }) {
         if (r.ok) {
           r.json().then((user) => setUser(user));
           nav("/dashboard");
-          localStorage.setItem("me", JSON.stringify(user))
+          // localStorage.setItem("me", JSON.stringify(user))
         }else{
           setError("Wrong Username or Password")
         }
