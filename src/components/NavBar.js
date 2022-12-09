@@ -6,7 +6,13 @@ import Container from "./container";
 
 export default function NavBar({ user, setUser }) {
     function handleLogoutClick() {
-      fetch("/logout", { method: "DELETE" }).then((r) => {
+      fetch("/logout", { 
+        method: "DELETE",
+        headers: {
+          "Access-Control-Allow-Origin":"no-cors",
+          "Content-Type": "application/json",
+        } 
+      }).then((r) => {
         if (r.ok) {
           setUser(null);
         }
