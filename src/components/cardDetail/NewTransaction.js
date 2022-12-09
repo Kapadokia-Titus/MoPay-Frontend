@@ -1,4 +1,4 @@
-import { Drawer, Schema, Form, RadioGroup, Radio, ButtonToolbar, Button, Placeholder, FlexboxGrid, SelectPicker } from 'rsuite';
+import { Drawer, Schema, Form, RadioGroup, Radio, ButtonToolbar, Button, Placeholder, FlexboxGrid, SelectPicker, Message } from 'rsuite';
 import React,{useState} from 'react';
 const styles = {
   radioGroupLabel: {
@@ -19,9 +19,11 @@ const nameRule = Schema.Types.StringType().isRequired('This fields is required')
 const emailRule = Schema.Types.StringType().isEmail('Please Enter A valid Email Address');
 
 
-export default function NewTransaction({uuid}) {
-  const [backdrop, setBackdrop] = React.useState('static');
-  const [open, setOpen] = React.useState(false);
+export default function NewTransaction({uuid, cardId}) {
+    //   message
+    const [message, setMessage] = useState(null)
+    const [backdrop, setBackdrop] = React.useState('static');
+    const [open, setOpen] = React.useState(false);
   
 
     // form value
@@ -29,15 +31,17 @@ export default function NewTransaction({uuid}) {
         card_name: '',
         card_number: '',
         card_bank:"",
+        receiver_email:"", 
         amount:"", 
         status:"paid",
-        user_id:uuid
+        user_id:uuid,
+        card_id:cardId
       });
 
    
     //   handle submit
     function handleOnSubmit(e) {
-        fetch("https://mopay-production.up.railway.app/cards", {
+        fetch("https://mopay-production.up.railway.app/pay", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -45,13 +49,21 @@ export default function NewTransaction({uuid}) {
             body: JSON.stringify(formValue),
         }).then((r) => {
             if (r.ok) {
-            r.json().then(data => console.log(data));
+            r.json().then(data => {
+                console.log(data)
+                setMessage("Payment Made successfully.")
+                setTimeout(function() {
+                    setMessage("")
+                    setOpen(false)
+                }, 2000);
+            });
             
             }
         })
         .catch(e => console.log(e))
     }
 
+// delay 
 
   return (
     <>
@@ -75,6 +87,13 @@ export default function NewTransaction({uuid}) {
           {/* new payment form start */}
           
             <FlexboxGrid>
+                <Form.Group>
+                    {message && (
+                      <Message showIcon type="success">
+                        {message}
+                      </Message>
+                    )}
+                  </Form.Group>
                 <FlexboxGrid.Item colspan={12} >
                     <Form.Group controlId="name-9">
                     <Form.ControlLabel>Cardholder Name</Form.ControlLabel>
@@ -106,7 +125,13 @@ export default function NewTransaction({uuid}) {
                     <Form.HelpText>Required</Form.HelpText>
                     </Form.Group>
                 </FlexboxGrid.Item>
-                
+                <FlexboxGrid.Item colspan={24} >
+                    <Form.Group controlId="name-9">
+                    <Form.ControlLabel>Receiver Email</Form.ControlLabel>
+                    <Form.Control name="receiver_email" placeholder="user@mail.com" type="email" rule={emailRule} />
+                    <Form.HelpText>Required</Form.HelpText>
+                    </Form.Group>
+                </FlexboxGrid.Item>
                 
             
             </FlexboxGrid>
