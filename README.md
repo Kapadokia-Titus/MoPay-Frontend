@@ -10,12 +10,7 @@ MoPay allows you to make  Taking Charge Of Your Personal Finance. You can consol
 
 ## UI's
 ### Landing
-<img src="home.png" height="300">
-<img src="register.png" height="300">
-<img src="login.png" height="300">
-
-<img src="dash_before.png" height="300">
-<img src="add_card.png" height="300">
-<img src="dashboard_after.png" height="300">
-<img src="card_detail.png" height="300">
-<img src="make_payment.png" height="300">
+<img src="home.png" ><img src="register.png" >
+<img src="login.png"><img src="dash_before.png" >
+<img src="add_card.png" ><img src="dashboard_after.png">
+<img src="card_detail.png"><img src="make_payment.png">
