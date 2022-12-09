@@ -30,7 +30,7 @@ export default function SignUp({ setUser }) {
 const nav = useNavigate();
     
 function handleOnSubmit(e) {
-    fetch("http://0.0.0.0:3000/signup", {
+    fetch("https://mopay-production.up.railway.app/signup", {
         method: "POST",
         headers: {
           "Access-Control-Allow-Origin":"no-cors",
