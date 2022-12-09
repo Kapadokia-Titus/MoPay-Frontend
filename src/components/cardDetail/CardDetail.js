@@ -7,7 +7,7 @@ import "./detail.css"
 import { useLocation } from "react-router-dom";
 import NewTransaction from "./NewTransaction";
 
-export default function CardDetail({card}) {
+export default function CardDetail({uuid}) {
     const location =useLocation();
     const mycard = location.state.state
     const nav = useNavigate(); 
@@ -24,7 +24,7 @@ export default function CardDetail({card}) {
     return(
 
         <Container>
-            <FlexboxGrid>   
+            <FlexboxGrid colspan={24}>   
                 
                 <div className="col-lg-6 col-md-6 col-sm-12">
                     <h5 style={{marginLeft:20}}>Your {mycard.card_bank} Details</h5>
@@ -85,16 +85,16 @@ export default function CardDetail({card}) {
                      <h5 style={{marginBottom:20}}> {mycard.card_name}'s Recent Transactions</h5>
                     </div>
                     <div className="col-lg-6 col-sm-12">
-                        <NewTransaction uuid={mycard.id}/>
+                        <NewTransaction uuid={mycard.user_id} cardId={mycard.id}/>
                     </div>
                     <div className="col-lg-12" style={{marginTop:20}}>
-                    <Transaction/>
+                        <FlexboxGrid.Item colspan={24}>
+                             <Transaction/>
+                        </FlexboxGrid.Item>
+                    
                     </div>
                   </div>
                     
-                    
-                
-                   
                 </div>
             </FlexboxGrid> 
         </Container>
