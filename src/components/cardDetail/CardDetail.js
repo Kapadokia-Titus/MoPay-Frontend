@@ -1,14 +1,26 @@
-import { FlexboxGrid } from "rsuite";
+import { Button, FlexboxGrid } from "rsuite";
 import Card from "../card/card";
 import Container from "../container";
 import { Transaction } from "./TransactionHistory";
+import { useNavigate } from "react-router-dom";
 import "./detail.css"
 import { useLocation } from "react-router-dom";
+import NewTransaction from "./NewTransaction";
 
 export default function CardDetail({card}) {
     const location =useLocation();
     const mycard = location.state.state
-    console.log(location.state.state)
+    const nav = useNavigate(); 
+    function deleteCard(e) {
+        fetch(`https://mopay-production.up.railway.app/cards/${e}`, {
+            method:'DELETE'
+        })
+        .then((r) => {
+            if (r.ok) {
+              nav("/");
+            }
+          });
+    }
     return(
 
         <Container>
@@ -59,7 +71,7 @@ export default function CardDetail({card}) {
                     {/* Buttons */}
                     <FlexboxGrid style={{marginLeft:20, color:"#808080", marginBottom:20}}>
                             <FlexboxGrid.Item colspan={12}>
-                                <button className="btn">Delete This Card</button>
+                                <button onClick={()=>deleteCard(mycard.id)} className="btn">Delete This Card</button>
                             </FlexboxGrid.Item> 
                            
                     </FlexboxGrid>
@@ -68,8 +80,21 @@ export default function CardDetail({card}) {
 
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12 trans">
-                <h5 style={{marginBottom:20}}> {mycard.card_name}'s Recent Transactions</h5>
+                  <div className="row">
+                    <div className="col-lg-6 col-sm-12">
+                     <h5 style={{marginBottom:20}}> {mycard.card_name}'s Recent Transactions</h5>
+                    </div>
+                    <div className="col-lg-6 col-sm-12">
+                        <NewTransaction uuid={mycard.id}/>
+                    </div>
+                    <div className="col-lg-12" style={{marginTop:20}}>
                     <Transaction/>
+                    </div>
+                  </div>
+                    
+                    
+                
+                   
                 </div>
             </FlexboxGrid> 
         </Container>
