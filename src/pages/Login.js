@@ -20,7 +20,7 @@ export default function Login({ setUser }) {
       fetch("https://mopay-production.up.railway.app/login", {
         method: "POST",
         headers: { 
-         "access-control-allow-origin" : "*",
+         "Access-Control-Allow-Origin":"no-cors",
           "Content-Type": "application/json"
         },
         body: JSON.stringify(formValue),
