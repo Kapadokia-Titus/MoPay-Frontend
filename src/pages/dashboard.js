@@ -17,7 +17,7 @@ export default function Dashboard({user, name, setCard}) {
     const nav = useNavigate();
     useEffect(()=>{
         
-        fetch(`https://mopay-production.up.railway.app/users/1`,{
+        fetch(`https://mopay-production.up.railway.app//users/${uuid}`,{
             method:'GET',
             headers: {
                 "Content-Type": "application/json"
@@ -65,7 +65,8 @@ export default function Dashboard({user, name, setCard}) {
                     </FlexboxGrid>
                     <FlexboxGrid>
                         <FlexboxGrid.Item colspan={24}>
-                            <Transaction/>
+                            <p>Recent Transactions</p>
+                            <Transaction data={cd}/>
                         </FlexboxGrid.Item>
                     </FlexboxGrid>
                 </Content>
