@@ -41,6 +41,7 @@ function handleOnSubmit(e) {
         if (r.ok) {
           r.json().then((user) => setUser(user));
           nav("/dashboard");
+          localStorage.setItem("me", JSON.stringify(user))
         }else{
           setError(r.error)
         }

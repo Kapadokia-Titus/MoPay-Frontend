@@ -28,6 +28,7 @@ export default function Login({ setUser }) {
         if (r.ok) {
           r.json().then((user) => setUser(user));
           nav("/dashboard");
+          localStorage.setItem("me", JSON.stringify(user))
         }else{
           setError("Wrong Username or Password")
         }
