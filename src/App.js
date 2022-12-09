@@ -15,7 +15,7 @@ function App() {
 
   useEffect(()=>{
     // auto-login
-    fetch("https://mopay-production.up.railway.app/me", {
+    fetch("http://0.0.0.0:3000/me", {
       method:'GET',
       headers: {
         "Access-Control-Allow-Origin":"no-cors",
