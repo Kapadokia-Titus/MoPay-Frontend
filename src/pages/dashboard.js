@@ -27,7 +27,7 @@ export default function Dashboard({user, name, setCard}) {
         .then(res => res.json())
         .then(data => 
             {
-                setCd(data.cards)
+                setCd(data?.cards)
                 setMessage("Welcome, All your cards are loaded, Click any of the card to view details.")
             })
         .catch(e=>console.log(e))
