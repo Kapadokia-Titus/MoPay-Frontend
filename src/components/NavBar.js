@@ -9,7 +9,6 @@ export default function NavBar({ user, setUser }) {
       fetch("https://mopay-production.up.railway.app/logout", { 
         method: "DELETE",
         headers: {
-          "Access-Control-Allow-Origin":"no-cors",
           "Content-Type": "application/json"
         } 
       }).then((r) => {

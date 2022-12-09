@@ -17,7 +17,6 @@ function App() {
     // auto-login
     fetch("https://mopay-production.up.railway.app/me", {
       headers: {
-        "Access-Control-Allow-Origin":"no-cors",
         "Content-Type": "application/json"
       }
     }).then((r) => {

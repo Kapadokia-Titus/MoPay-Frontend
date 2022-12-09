@@ -17,10 +17,10 @@ export default function Login({ setUser }) {
 
   
     function handleSubmit(e) {
+      e.preventDefault();
       fetch("https://mopay-production.up.railway.app/login", {
         method: "POST",
         headers: { 
-         "Access-Control-Allow-Origin":"no-cors",
           "Content-Type": "application/json"
         },
         body: JSON.stringify(formValue),

@@ -20,7 +20,6 @@ export default function Dashboard({user, name, setCard}) {
         fetch(`https://mopay-production.up.railway.app/users/1`,{
             method:'GET',
             headers: {
-                "Access-Control-Allow-Origin":"no-cors",
                 "Content-Type": "application/json"
               }
         })
@@ -28,6 +27,7 @@ export default function Dashboard({user, name, setCard}) {
         .then(data => 
             {
                 setCd(data?.cards)
+                console.log(data.cards)
                 setMessage("Welcome, All your cards are loaded, Click any of the card to view details.")
             })
         .catch(e=>console.log(e))
