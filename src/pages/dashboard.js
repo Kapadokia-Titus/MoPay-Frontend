@@ -15,7 +15,7 @@ export default function Dashboard({user, name, setCard}) {
 
     const [cd, setCd] = useState([])
     const nav = useNavigate();
-   
+     console.log(uuid)
     useEffect(()=>{
         
         fetch(`https://mopay-production.up.railway.app/users/${uuid}`,{
