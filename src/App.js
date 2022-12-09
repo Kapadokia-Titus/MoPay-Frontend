@@ -15,7 +15,12 @@ function App() {
 
   useEffect(()=>{
     // auto-login
-    fetch("/me").then((r) => {
+    fetch("https://mopay-production.up.railway.app/me", {
+      headers: {
+        "Access-Control-Allow-Origin":"no-cors",
+        "Content-Type": "application/json"
+      }
+    }).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }

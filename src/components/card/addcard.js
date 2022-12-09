@@ -36,7 +36,7 @@ export default function AddPayment({setMessage, setAdded, uuid}) {
 
 
     function handleOnSubmit(e) {
-        fetch("/cards", {
+        fetch("https://mopay-production.up.railway.app/cards", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
