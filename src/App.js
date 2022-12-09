@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Routes, Route } from "react-router-dom";
 import './App.css';
+import CardDetail from './components/cardDetail/CardDetail';
 import Footer from './components/footer';
 import NavBar from './components/NavBar';
 import Dashboard from './pages/dashboard';
@@ -10,6 +11,7 @@ import SignUp from './pages/SignUp';
 
 function App() {
   const [user, setUser] = useState(null)
+  const [card, setCard] = useState(null)
 
   useEffect(()=>{
     // auto-login
@@ -20,13 +22,18 @@ function App() {
     });
   },[])
 
+
+
+  console.log(card)
   return (
     <>
     <NavBar user={user} setUser={setUser} />
     <main>
       {user ? (
         <Routes>
-          <Route path="/dashboard" element={<Dashboard user={user} name={user.username}/>}/>
+          <Route path="/dashboard" element={<Dashboard user={user} name={user.username} setCard={setCard}/>}/>
+          <Route path="/" element={<Dashboard user={user} name={user.username}/>}/>
+          <Route path="/details" element={<CardDetail setUser={setUser} card={card} />}/>
         </Routes>
       ) : (
         <Routes>
