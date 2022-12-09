@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import AddPayment from '../components/card/addcard';
 import { Container,Message, Content,FlexboxGrid, Panel, Form, Button, Input, SelectPicker,Schema } from 'rsuite';
 import { useState, useEffect } from 'react';
+import TransactionHistory, { Transaction } from '../components/cardDetail/TransactionHistory';
 
 
-export default function Dashboard({user, name}) { 
+export default function Dashboard({user, name, setCard}) { 
     //   message
     const [message, setMessage] = useState(null)
+    const [myCard, setMyCard] = useState(null)
     const uuid = user?.id; 
-    
-    console.log(uuid)
 
     const [cd, setCd] = useState([])
     const nav = useNavigate();
@@ -27,9 +27,14 @@ export default function Dashboard({user, name}) {
             })
         .catch(e=>console.log(e))
     }, [setCd])
-    console.log(cd)
 
-   
+    function handlePickCard(card){
+        setMyCard(card)
+        nav("/details", {state:{state:card}})
+    }
+
+    console.log(myCard)
+    
         if (user) {
             return (
                 <Container>
@@ -47,14 +52,17 @@ export default function Dashboard({user, name}) {
                   </Form.Group>
                     </FlexboxGrid.Item>
                     {cd?.map(card=>(
-                        <Card key={card.id} card={card} name={user.username}/>
+                        <div key={card.id} id={card.id} onClick={()=>handlePickCard(card)}><Card card={card} name={user.username}/></div>
                     ))}
                     
                     <AddPayment setCard={setCd} uuid={uuid} />
-
-                   
+                        
                     </FlexboxGrid>
-
+                    <FlexboxGrid>
+                        <FlexboxGrid.Item colspan={24}>
+                            <Transaction/>
+                        </FlexboxGrid.Item>
+                    </FlexboxGrid>
                 </Content>
                 </Container>
             )
