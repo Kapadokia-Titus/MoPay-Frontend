@@ -37,7 +37,7 @@ export default function NewTransaction({uuid}) {
    
     //   handle submit
     function handleOnSubmit(e) {
-        fetch("https://mopay-production.up.railway.app/cards", {
+        fetch("/cards", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",

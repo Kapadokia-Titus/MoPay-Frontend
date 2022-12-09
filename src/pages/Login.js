@@ -17,7 +17,7 @@ export default function Login({ setUser }) {
 
   
     function handleSubmit(e) {
-      fetch("https://mopay-production.up.railway.app/login", {
+      fetch("/login", {
         method: "POST",
         headers: { 
          "Access-Control-Allow-Origin":"no-cors",
