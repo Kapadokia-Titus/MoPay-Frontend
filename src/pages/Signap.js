@@ -9,7 +9,7 @@ export default function Signap({ setUser }) {
   
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("/signup", {
+        fetch("https://mopay-production.up.railway.app/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

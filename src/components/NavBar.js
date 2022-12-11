@@ -6,7 +6,7 @@ import Container from "./container";
 
 export default function NavBar({ user, setUser }) {
     function handleLogoutClick() {
-      fetch("/logout", { 
+      fetch("https://mopay-production.up.railway.app/logout", { 
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"

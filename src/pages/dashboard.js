@@ -20,7 +20,7 @@ export default function Dashboard({user, name, setCard}) {
 
     useEffect(()=>{
         console.log("User Id " +myUser)
-       fetch(`/users/${myUser}`)
+       fetch(`https://mopay-production.up.railway.app/users/${myUser}`)
         .then(res => res.json())
         .then(data => 
             {

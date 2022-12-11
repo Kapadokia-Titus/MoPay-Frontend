@@ -17,7 +17,7 @@ export default function Login({ setUser }) {
 
   
     function handleSubmit(e) {
-      fetch("/login", {
+      fetch("https://mopay-production.up.railway.app/login", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json"

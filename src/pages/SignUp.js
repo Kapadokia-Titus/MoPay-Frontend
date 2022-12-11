@@ -30,7 +30,7 @@ export default function SignUp({ setUser }) {
 const nav = useNavigate();
     
 function handleOnSubmit(e) {
-    fetch("/signup", {
+    fetch("https://mopay-production.up.railway.app/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
