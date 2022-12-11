@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Routes, Route } from "react-router-dom";
 import './App.css';
+import { getAllCards, getCurrentUser } from './client/Client';
 import CardDetail from './components/cardDetail/CardDetail';
 import Footer from './components/footer';
 import NavBar from './components/NavBar';
@@ -12,21 +13,16 @@ import SignUp from './pages/SignUp';
 function App() {
   const [user, setUser] = useState(null)
   const [card, setCard] = useState(null)
+  const myUser = sessionStorage.getItem("user");
 
+  // check if session is on
+  
+  console.log("current user \n"+myUser)
   useEffect(()=>{
-    // auto-login
-    fetch("https://mopay-production.up.railway.app/me", {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
+    if (myUser) {
+      setUser(myUser)
+    }
   },[])
-
-
 
   console.log(card)
   return (
