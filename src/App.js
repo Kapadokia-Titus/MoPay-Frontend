@@ -24,7 +24,6 @@ function App() {
     }
   },[])
 
-  console.log(card)
   return (
     <>
     <NavBar user={user} setUser={setUser} />

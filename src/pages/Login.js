@@ -32,8 +32,15 @@ export default function Login({ setUser }) {
               sessionStorage.setItem("id", user.id)
               sessionStorage.setItem("cards", JSON.stringify(user.cards))
           });
+        }else{
+          r.json().then((err) => {
+            setError("Wrong Username or Password")
+          })
+         
         }
-      });
+      }).catch(e=>{
+        console.log(e)
+      })
     }
 
 

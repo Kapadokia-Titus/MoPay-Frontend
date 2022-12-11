@@ -46,7 +46,15 @@ function handleOnSubmit(e) {
               sessionStorage.setItem("id", user.id)
               sessionStorage.setItem("cards", JSON.stringify(user.cards))
           });
+        }else{
+          r.json().then((err) => {
+            console.log(err.errors[0])
+            setError(err.errors[0])
+          })
+         
         }
+      }).catch(e=>{
+        console.log(e)
       });
 }
 
