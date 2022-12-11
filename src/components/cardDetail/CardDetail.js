@@ -12,7 +12,7 @@ export default function CardDetail({uuid}) {
     const mycard = location.state.state
     const nav = useNavigate(); 
     function deleteCard(e) {
-        fetch(`https://mopay-production.up.railway.app/cards/${e}`, {
+        fetch(`/cards/${e}`, {
             method:'DELETE'
         })
         .then((r) => {
