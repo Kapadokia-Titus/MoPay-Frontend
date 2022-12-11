@@ -8,7 +8,7 @@ export const Transaction = ({data}) => {
 
     useEffect(()=>{
         data?.map(card=>{
-            fetch(`https://mopay-production.up.railway.app/card/${card.id}`)
+            fetch(`/card/${card.id}`)
             .then(res =>res.json)
             .then(data => setTransactions(data.payments))
         })
