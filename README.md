@@ -1,4 +1,4 @@
-# <img src="mopay.png" height="100px"> About MoPay 
+# <img src="mopay.png" height="100px">  
 MoPay allows you to make  Taking Charge Of Your Personal Finance. You can consolidate all your funds under one application, get track of all transactions and for what reasons they were disbursed. 
 
 ## Technology
@@ -10,6 +10,7 @@ MoPay allows you to make  Taking Charge Of Your Personal Finance. You can consol
 
 ## UI's
 ### Landing
-<img src="home.png"/>
-### Landing
-<img src="home.png"/>
+<img src="home.png" ><img src="register.png" >
+<img src="login.png"><img src="dash_before.png" >
+<img src="add_card.png" ><img src="dashboard_after.png">
+<img src="card_detail.png"><img src="make_payment.png">
