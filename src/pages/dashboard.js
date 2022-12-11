@@ -5,6 +5,7 @@ import AddPayment from '../components/card/addcard';
 import { Container,Message, Content,FlexboxGrid, Panel, Form, Button, Input, SelectPicker,Schema } from 'rsuite';
 import { useState, useEffect } from 'react';
 import TransactionHistory, { Transaction } from '../components/cardDetail/TransactionHistory';
+import { getUser } from '../client/Client';
 
 
 export default function Dashboard({user, name, setCard}) { 
@@ -12,33 +13,33 @@ export default function Dashboard({user, name, setCard}) {
     const [message, setMessage] = useState(null)
     const [myCard, setMyCard] = useState(null)
     const uuid = user?.id; 
-
+    const myUser = sessionStorage.getItem("user");
+    const myCards = sessionStorage.getItem("cards");
     const [cd, setCd] = useState([])
     const nav = useNavigate();
+
     useEffect(()=>{
-        
-        fetch(`https://mopay-production.up.railway.app//users/${uuid}`,{
-            method:'GET',
-            headers: {
-                "Content-Type": "application/json"
-              }
-        })
+        console.log("User Id " +myUser)
+       fetch(`/users/${myUser}`)
         .then(res => res.json())
         .then(data => 
             {
-                setCd(data?.cards)
-                console.log(data.cards)
+                setCd(data.cards)
                 setMessage("Welcome, All your cards are loaded, Click any of the card to view details.")
             })
         .catch(e=>console.log(e))
-    }, [setCd])
+    }, [])
+
+   
 
     function handlePickCard(card){
         setMyCard(card)
         nav("/details", {state:{state:card}})
     }
 
-    console.log(uuid)
+    console.log("cards "+ myCards)
+    
+    console.log("============ The set Cards ========== \n"+cd)
     
         if (user) {
             return (
@@ -56,8 +57,8 @@ export default function Dashboard({user, name, setCard}) {
                     )}
                   </Form.Group>
                     </FlexboxGrid.Item>
-                    {cd?.map(card=>(
-                        <div key={card.id} id={card.id} onClick={()=>handlePickCard(card)}><Card card={card} name={user.username}/></div>
+                    {JSON.parse(myCards).map((card, index)=>(
+                        <div key={index} id={card.id} onClick={()=>handlePickCard(card)}><Card card={card} name={user.username}/></div>
                     ))}
                     
                     <AddPayment setCard={setCd} uuid={uuid} />

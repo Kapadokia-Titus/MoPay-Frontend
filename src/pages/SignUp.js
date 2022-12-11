@@ -30,7 +30,7 @@ export default function SignUp({ setUser }) {
 const nav = useNavigate();
     
 function handleOnSubmit(e) {
-    fetch("https://mopay-production.up.railway.app/signup", {
+    fetch("/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -38,14 +38,16 @@ function handleOnSubmit(e) {
         body: JSON.stringify(formValue),
       }).then((r) => {
         if (r.ok) {
-          r.json().then((user) => setUser(user));
-          nav("/dashboard");
-          // localStorage.setItem("me", JSON.stringify(user))
-        }else{
-          setError(r.error)
+          r.json().then((user) => {
+              setUser(user)
+              nav("/dashboard")
+              
+              sessionStorage.setItem("user", JSON.stringify(user))
+              sessionStorage.setItem("id", user.id)
+              sessionStorage.setItem("cards", JSON.stringify(user.cards))
+          });
         }
-      })
-      .catch(e => console.log(e))
+      });
 }
 
     return(

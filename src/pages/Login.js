@@ -1,5 +1,5 @@
 import { Container,Message, Content,FlexboxGrid, Panel, Form, Button, Input, SelectPicker,Schema } from 'rsuite';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import '../css/style.css'
 
@@ -17,7 +17,7 @@ export default function Login({ setUser }) {
 
   
     function handleSubmit(e) {
-      fetch("https://mopay-production.up.railway.app/login", {
+      fetch("/login", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json"
@@ -25,14 +25,14 @@ export default function Login({ setUser }) {
         body: JSON.stringify(formValue),
       }).then((r) => {
         if (r.ok) {
-          r.json().then((user) => setUser(user));
-          nav("/dashboard");
-          // localStorage.setItem("me", JSON.stringify(user))
-        }else{
-          setError("Wrong Username or Password")
+          r.json().then((user) => {
+              setUser(user)
+              nav("/dashboard")
+              sessionStorage.setItem("user", JSON.stringify(user))
+              sessionStorage.setItem("id", user.id)
+              sessionStorage.setItem("cards", JSON.stringify(user.cards))
+          });
         }
-      }).catch(e=>{
-        console.log("Error Sending Data" + e)
       });
     }
 
