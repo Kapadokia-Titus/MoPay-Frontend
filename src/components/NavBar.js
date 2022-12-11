@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import { Avatar, Badge } from "rsuite";
+import { useNavigate } from "react-router-dom";
 import logo from '../img/mopay.png'
 import '../css/style.css'
 import Container from "./container";
 
 export default function NavBar({ user, setUser }) {
+
+  const nav = useNavigate();
+
     function handleLogoutClick() {
       fetch("https://mopay-production.up.railway.app/logout", { 
         method: "DELETE",
@@ -13,6 +17,7 @@ export default function NavBar({ user, setUser }) {
         } 
       }).then((r) => {
         if (r.ok) {
+          nav("/")
           setUser(null);
           sessionStorage.clear();
         }
